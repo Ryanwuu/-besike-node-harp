@@ -8,4 +8,12 @@ if (args.port){
 }
 var app = createMiniHarp();
 console.log("Starting a http server on port "+port);
+app.use(function (req,res,next){
+	if(req.url == "/current-time"){
+		res.end((new Date()).toISOString()+"\n");
+	}else{
+		next();
+	}
+
+})
 app.listen(port);
